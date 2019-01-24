@@ -1,33 +1,38 @@
 package persistencia;
 
-
-import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DAO {
+	
 
-    Connection con; // controlar acesso db
-    PreparedStatement stmt; // manipula instrução
-    ResultSet rs; // manipula resultados
+	Connection con; // 
+	PreparedStatement stmt;// 
+	ResultSet rs; // 
 
-    public void abrirConexao() throws Exception {
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/projetomod3", "root", "");
-    }
+	public void abrirConexao() throws Exception {
+		
+		con = DriverManager.getConnection("jdbc:mysql:localhost:3306/ProjetoMod3", "root", "");
+	}
 
-    public void fecharConexao() throws Exception {
-        con.close();
-    }
-    
-    public static void main(String[] args) {
+	public void fecharConexao() throws Exception {
+		con.close();
+	}
+
+	public static void main(String[] args) {
+
 		try {
-			DAO d = new DAO();
-			d.abrirConexao();
-			System.out.println("Conectei");
+			DAO t = new DAO();
+			t.abrirConexao();
+			System.out.println("conectei");
 		} catch (Exception e) {
-			System.out.println("Erro ao conectar: "+e.getMessage());
-			e.printStackTrace();
+			System.out.println("erro ao conectar");
+			// TODO: handle exception
 		}
 	}
 }
+	
+
+
