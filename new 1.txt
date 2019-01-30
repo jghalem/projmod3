@@ -4,29 +4,29 @@ use projetohotel;
 create table quarto(
 numeroQuarto int primary key not null,
 andarQuarto int not null,
-dispQuarto boolean
+dispQuarto boolean not null
 );
 
 create table cliente(
-cpf varchar(50) primary key not null,
-nome varchar(50) not null,
+cpf varchar(11) primary key not null,
+nome varchar(30) not null,
 numeroReserva int,
-rg varchar(50) not null,
-telefone int not null
+rg varchar(10) not null,
+telefone varchar(16) not null
 );
 
 create table funcionario(
 codigo int not null primary key,
 cargo boolean,
-contato varchar(50) not null,
+contato varchar(16) not null,
 email varchar(50),
-nome varchar(50)
+nome varchar(30)
 );
 
 create table reserva(
 numeroreserva int primary key auto_increment not null,
-cpf varchar(50) not null,
+cpf varchar(11) not null,
 numeroquarto int not null,
-checkin date,
-checkout date
+checkin timestamp,
+checkout timestamp
 );
