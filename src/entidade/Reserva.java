@@ -5,22 +5,15 @@ import java.sql.Date;
 public class Reserva {
 
 	private int numeroReserva;
-	private int idCliente;
+	private int cpf;
 	private int numeroQuarto;
+	private int andarQuarto;
 	private Date checkIn;
 	private Date checkOut;
 
 	public Reserva() {
 	}
 
-	public Reserva(int numeroReserva, int idCliente, int numeroQuarto, Date checkIn, Date checkOut) {
-		this.numeroReserva = numeroReserva;
-		this.idCliente = idCliente;
-		this.numeroQuarto = numeroQuarto;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-	}
-	
 	public int getNumeroReserva() {
 		return numeroReserva;
 	}
@@ -29,12 +22,12 @@ public class Reserva {
 		this.numeroReserva = numeroReserva;
 	}
 
-	public int getIdCliente() {
-		return idCliente;
+	public int getCpf() {
+		return cpf;
 	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
 	}
 
 	public int getNumeroQuarto() {
@@ -43,6 +36,14 @@ public class Reserva {
 
 	public void setNumeroQuarto(int numeroQuarto) {
 		this.numeroQuarto = numeroQuarto;
+	}
+
+	public int getAndarQuarto() {
+		return andarQuarto;
+	}
+
+	public void setAndarQuarto(int andarQuarto) {
+		this.andarQuarto = andarQuarto;
 	}
 
 	public Date getCheckIn() {
@@ -63,7 +64,7 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return "Info Reserva\n Numero: " + numeroReserva + "\n ID Cliente: " + idCliente + "\n Numero do Quarto: "
+		return "Info Reserva\n Numero: " + numeroReserva + "\n CPF Cliente: " + cpf + "\n Numero do Quarto: "
 				+ numeroQuarto + "\n Check-In: " + checkIn + "\n Check-Out: + checkOut";
 	}
 

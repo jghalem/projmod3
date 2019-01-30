@@ -4,26 +4,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidacaoQuarto {
-	Pattern p;
-	Matcher m;
+	public static Pattern p;
+	public static Matcher m;
 
-	public boolean VerificarQuarto(String nome) {
-		p = Pattern.compile("[1-9]{3}");
-		m = p.matcher(nome);
+	public static boolean validarQuarto(Integer numeroQuarto) {
+		String numQuarto;
+		numQuarto = numeroQuarto.toString();
+		p = Pattern.compile("[0-9]{3}");
+		m = p.matcher(numQuarto);
 		return m.matches();
 	}
 
-	public boolean VerificarSexo(String sexo) {
-		boolean verifica = false;
-		if (sexo.equalsIgnoreCase("f") || sexo.equalsIgnoreCase("m")) {
-			verifica = true;
-		}
-		return verifica;
+	public static boolean validarAndar(Integer andarQuarto) {
+		String andQuarto;
+		andQuarto = andarQuarto.toString();
+		p = Pattern.compile("[1-9]{1}");
+		m = p.matcher(andQuarto);
+		return m.matches();
 	}
-
-	public boolean VerificarEmail(String email) {
-		p = Pattern.compile("[a-z0-9_.-]+@[a-z0-9_.-]+\\.[a-z]+");
-		m = p.matcher(email);
+	
+	public static boolean validarDisponibilidade(String disponivel) {
+		disponivel.toString();
+		p = Pattern.compile("[sn]{1}");
+		m = p.matcher(disponivel);
 		return m.matches();
 	}
 

@@ -5,8 +5,15 @@ public class Quarto {
 	private int andarQuarto;
 	private int numeroQuarto;
 	private boolean dispQuarto;
+	private int update;
 
 	public Quarto() {
+	}
+
+	public Quarto(int andarQuarto, int numeroQuarto, boolean dispQuarto, int update) {
+		this.andarQuarto = andarQuarto;
+		this.numeroQuarto = numeroQuarto;
+		this.dispQuarto = dispQuarto;
 	}
 
 	public int getAndarQuarto() {
@@ -33,15 +40,23 @@ public class Quarto {
 		this.dispQuarto = dispQuarto;
 	}
 
+	public int getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(int update) {
+		this.update = update;
+	}
+
 	@Override
 	public String toString() {
 		String disponivel;
 		if (dispQuarto){
-			disponivel = "Sim";
+			disponivel = "Disponível";
 		} else {
-			disponivel = "Não";
+			disponivel = "Indisponível";
 		}
-		return "Info Quarto\n Andar: " + andarQuarto + "\n Número: " + numeroQuarto + "\n Disponivel? " + disponivel;
+		return " N° " + numeroQuarto + ", " + andarQuarto + "° Andar, " + disponivel;
 	}
 
 }
