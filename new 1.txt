@@ -10,16 +10,15 @@ dispQuarto boolean not null
 create table cliente(
 cpf varchar(11) primary key not null,
 nome varchar(30) not null,
-numeroReserva int,
 rg varchar(10) not null,
 telefone varchar(16) not null
 );
 
 create table funcionario(
-codigo int not null primary key,
+cpf int not null primary key,
 cargo boolean,
 contato varchar(16) not null,
-email varchar(50),
+rg varchar(10),
 nome varchar(30)
 );
 
