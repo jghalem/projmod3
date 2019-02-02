@@ -26,6 +26,7 @@ nome varchar(30)
 
 create table login(
 idlogin int primary key auto_increment not null,
+idfuncionario int not null,
 usuario varchar(11) not null,
 senha varchar(20) not null,
 islogado bit not null
@@ -33,9 +34,9 @@ islogado bit not null
 
 create table reserva(
 numeroreserva int primary key auto_increment not null,
-cpf varchar(11) not null,
-numeroquarto int not null,
-funcionario int not null,
-checkin timestamp,
-checkout timestamp
+idlogin int not null,
+idquarto int not null,
+idcliente int not null,
+checkin timestamp not null,
+checkout timestamp null
 );
