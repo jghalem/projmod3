@@ -17,7 +17,7 @@ telefone varchar(16) not null
 
 create table funcionario(
 idfuncionario int primary key auto_increment not null,
-cpf int not null,
+cpf varchar(11) not null,
 cargo boolean not null,
 contato varchar(16) not null,
 rg varchar(10),
@@ -29,7 +29,8 @@ idlogin int primary key auto_increment not null,
 idfuncionario int not null,
 usuario varchar(11) not null,
 senha varchar(20) not null,
-islogado boolean not null
+islogado boolean not null,
+isgerente boolean not null
 );
 
 create table reserva(
