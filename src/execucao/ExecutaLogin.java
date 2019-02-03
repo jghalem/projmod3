@@ -10,18 +10,9 @@ import validacao.ValidacaoLogin;
 
 public class ExecutaLogin {
 
-	private static Login l;
-	private static LoginDAO ld;
-	private static Scanner s;
-
-	public static void main(String[] args) {
-
-		l = new Login();
-		ld = new LoginDAO();
-		s = new Scanner(System.in);
-
-		testeMetodos();
-	}
+	protected static Login l;
+	protected static LoginDAO ld;
+	protected static Scanner s;
 
 	public static void criarLogin() {
 
@@ -142,8 +133,9 @@ public class ExecutaLogin {
 
 					if (ValidacaoLogin.validarSenha(sen)) {
 						if (ld.fazerLoginSenha(sen).equals(sen)) {
-							if (ld.buscarIsLogado(vis)) {
+							if (ld.defIsLogado(vis)) {
 								System.out.println("Logado com sucesso!");
+								return true;
 							}
 						} else {
 							System.out.println("Senha incorreta!");
@@ -154,7 +146,6 @@ public class ExecutaLogin {
 								"A senha deve ter de 6 a 20 caracteres e conter somente números, maiúsculas e minúsculas!");
 						fazerLogin();
 					}
-
 				} else {
 					System.out.println("Usuário incorreto!");
 					fazerLogin();
@@ -170,27 +161,49 @@ public class ExecutaLogin {
 		return false;
 	}
 
-	public static void testeMetodos() {
+	public static void testeMetodos() throws Exception {
+		
+		l = new Login();
+		ld = new LoginDAO();
+		s = new Scanner(System.in);
 
-		System.out.println("Digite a operação desejada: \nCriar - Visualizar - Atualizar - Apagar - Login");
+		System.out.println("Digite a operação desejada: \nCriar - Visualizar - Atualizar - Apagar");
 		String op = s.nextLine();
 		op.toLowerCase();
 
 		switch (op) {
 		case "criar":
-			criarLogin();
+			if (ld.buscarIsLogado(l.getUsuario())) {
+				criarLogin();
+			} else {
+				System.out.println("Faça login para poder acessar as opções!");
+				fazerLogin();
+			}
 			break;
 		case "visualizar":
-			visualizarLogin();
+			if (ld.buscarIsLogado(l.getUsuario())) {
+				visualizarLogin();
+				;
+			} else {
+				System.out.println("Faça login para poder acessar as opções!");
+				fazerLogin();
+			}
 			break;
 		case "atualizar":
-			atualizarLogin();
+			if (ld.buscarIsLogado(l.getUsuario())) {
+				atualizarLogin();
+			} else {
+				System.out.println("Faça login para poder acessar as opções!");
+				fazerLogin();
+			}
 			break;
 		case "apagar":
-			apagarLogin();
-			break;
-		case "login":
-			fazerLogin();
+			if (ld.buscarIsLogado(l.getUsuario())) {
+				apagarLogin();
+			} else {
+				System.out.println("Faça login para poder acessar as opções!");
+				fazerLogin();
+			}
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!\n");

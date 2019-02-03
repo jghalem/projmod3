@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 public class ValidacaoLogin {
 	public static Pattern p;
 	public static Matcher m;
-	
-	//TODO : Metodo validarUsuario = Metodo validarCpf do cliente
 
 	public static boolean validarUsuario(String usuario) {
 		p = Pattern.compile("[0-9]{11}");
@@ -19,15 +17,6 @@ public class ValidacaoLogin {
 		p = Pattern.compile("[a-zA-Z0-9]{6,20}");
 		m = p.matcher(senha);
 		return m.matches();
-	}
-	
-	public static boolean checkBoolean(boolean isOk) {
-		if (isOk) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 }

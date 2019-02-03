@@ -95,24 +95,41 @@ public class LoginDAO extends DAO {
 		fecharConexao();
 		return isgerente;
 	}
-	
-	public boolean buscarIsLogado(String usuario) throws Exception {
+
+	public boolean defIsLogado(String usuario) throws Exception {
 
 		abrirConexao();
 		stmt = con.prepareStatement("update login set islogado = ? where usuario = ?");
 		stmt.setBoolean(1, true);
 		stmt.setString(2, usuario);
 
-		boolean teste = false;
-		if (stmt.execute()) {
-			teste = true;
-			rs.close();
-			stmt.close();
-			fecharConexao();
-			return teste;
-		} else {
-			return teste;
+		stmt.execute();
+
+		rs.close();
+		stmt.close();
+		fecharConexao();
+		return true;
+
+	}
+
+	public boolean buscarIsLogado(String usuario) throws Exception {
+
+		abrirConexao();
+		stmt = con.prepareStatement("select islogado from login where usuario = ?");
+		stmt.setString(1, usuario);
+
+		stmt.executeQuery();
+
+		boolean isLogado = false;
+		while (rs.next()) {
+			isLogado = rs.getBoolean("cargo");
 		}
+
+		rs.close();
+		stmt.close();
+		fecharConexao();
+		return isLogado;
+
 	}
 
 	public String atualizarLogin(Login l) throws Exception {
@@ -143,17 +160,17 @@ public class LoginDAO extends DAO {
 
 		rs = stmt.executeQuery();
 
-		String testeUsuario = ""; 
+		String testeUsuario = "";
 		while (rs.next()) {
-		testeUsuario = rs.getString("usuario");
+			testeUsuario = rs.getString("usuario");
 		}
-		
+
 		rs.close();
 		stmt.close();
 		fecharConexao();
 		return testeUsuario;
 	}
-	
+
 	public String fazerLoginSenha(String senha) throws Exception {
 
 		abrirConexao();
@@ -162,11 +179,11 @@ public class LoginDAO extends DAO {
 
 		rs = stmt.executeQuery();
 
-		String testeSenha = ""; 
+		String testeSenha = "";
 		while (rs.next()) {
-		testeSenha = rs.getString("senha");
+			testeSenha = rs.getString("senha");
 		}
-		
+
 		rs.close();
 		stmt.close();
 		fecharConexao();
