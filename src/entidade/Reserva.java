@@ -1,6 +1,6 @@
 package entidade;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Reserva {
 
@@ -8,10 +8,17 @@ public class Reserva {
 	private int cpf;
 	private int numeroQuarto;
 	private int andarQuarto;
-	private Date checkIn;
-	private Date checkOut;
+	private Timestamp checkIn;
+	private Timestamp checkOut;
 
 	public Reserva() {
+	}
+
+	public Reserva(int numeroReserva, int cpf, int numeroQuarto, int andarQuarto, Timestamp checkIn) {
+		this.numeroReserva = numeroReserva;
+		this.cpf = cpf;
+		this.numeroQuarto = numeroQuarto;
+		this.andarQuarto = andarQuarto;
 	}
 
 	public int getNumeroReserva() {
@@ -46,19 +53,19 @@ public class Reserva {
 		this.andarQuarto = andarQuarto;
 	}
 
-	public Date getCheckIn() {
+	public Timestamp getCheckIn() {
 		return checkIn;
 	}
 
-	public void setCheckIn(Date checkIn) {
+	public void setCheckIn(Timestamp checkIn) {
 		this.checkIn = checkIn;
 	}
 
-	public Date getCheckOut() {
+	public Timestamp getCheckOut() {
 		return checkOut;
 	}
 
-	public void setCheckOut(Date checkOut) {
+	public void setCheckOut(Timestamp checkOut) {
 		this.checkOut = checkOut;
 	}
 

@@ -12,12 +12,13 @@ public class ExecutaQuarto {
 	private static Quarto q;
 	private static QuartoDAO qd;
 	private static Scanner s;
-
+	
 	public static void main(String[] args) {
+
 		q = new Quarto();
 		qd = new QuartoDAO();
 		s = new Scanner(System.in);
-
+		
 		System.out.println("Digite a operação desejada: \nCriar - Visualizar - Atualizar - Apagar");
 		String op = s.nextLine();
 		op.toLowerCase();
@@ -42,6 +43,11 @@ public class ExecutaQuarto {
 	}
 
 	public static void criarQuarto() {
+		
+		q = new Quarto();
+		qd = new QuartoDAO();
+		s = new Scanner(System.in);
+		
 		try {
 			q.setNumeroQuarto(EntradaDadosQuarto.capturarNumero());
 			q.setAndarQuarto(EntradaDadosQuarto.capturarAndar());
@@ -60,6 +66,11 @@ public class ExecutaQuarto {
 	}
 
 	public static void visualizarQuarto() {
+		
+		q = new Quarto();
+		qd = new QuartoDAO();
+		s = new Scanner(System.in);
+		
 		try {
 			System.out.println("Deseja visualizar os quartos de que andar? (Digite '0' para todos)");
 			Integer vis = s.nextInt();
@@ -82,6 +93,11 @@ public class ExecutaQuarto {
 	}
 
 	public static void atualizarQuarto() {
+		
+		q = new Quarto();
+		qd = new QuartoDAO();
+		s = new Scanner(System.in);
+		
 		try {
 			System.out.println("Digite o numero do quarto que deseja alterar:");
 			Integer vis = s.nextInt();
@@ -104,6 +120,11 @@ public class ExecutaQuarto {
 	}
 
 	public static void apagarQuarto() {
+		
+		q = new Quarto();
+		qd = new QuartoDAO();
+		s = new Scanner(System.in);
+		
 		try {
 			System.out.println("Digite o numero do quarto que deseja apagar:");
 			Integer vis = s.nextInt();

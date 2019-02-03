@@ -56,7 +56,7 @@ public class Quarto {
 		} else {
 			disponivel = "Indisponível";
 		}
-		return " N° " + numeroQuarto + ", " + andarQuarto + "° Andar, " + disponivel;
+		return " N° Quarto" + numeroQuarto + ", " + andarQuarto + "° Andar, " + disponivel;
 	}
 
 }
