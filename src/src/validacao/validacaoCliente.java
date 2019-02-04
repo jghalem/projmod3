@@ -12,7 +12,7 @@ public class validacaoCliente {
     
     public boolean verificarnome (String nome){
 
-        p = Pattern.compile("[a-zA-Zà-ù]{3,30}");
+        p = Pattern.compile("[ a-zA-Zà-ù]{3,30}");
         
         m = p.matcher(nome);
         

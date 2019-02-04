@@ -118,7 +118,7 @@ public class executaCliente {
 				
 				default:
 					System.out.println("Digite uma das quatro opções!");
-				
+					
 				}
 
 				
