@@ -29,7 +29,6 @@ idlogin int primary key auto_increment not null,
 idfuncionario int not null,
 usuario varchar(11) not null,
 senha varchar(20) not null,
-islogado boolean not null,
 isgerente boolean not null
 );
 
