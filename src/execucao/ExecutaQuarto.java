@@ -3,10 +3,8 @@ package execucao;
 import java.util.List;
 import java.util.Scanner;
 
-import entidade.Login;
 import entidade.Quarto;
 import entradaDados.EntradaDadosQuarto;
-import persistencia.LoginDAO;
 import persistencia.QuartoDAO;
 
 public class ExecutaQuarto {
@@ -14,8 +12,6 @@ public class ExecutaQuarto {
 	private static Quarto q;
 	private static QuartoDAO qd;
 	private static Scanner s;
-	private static LoginDAO ld;
-	private static Login l;
 
 	public static void criarQuarto() {
 
@@ -30,9 +26,10 @@ public class ExecutaQuarto {
 
 			if (qd.inserir(q)) {
 				System.out.println("Quarto Gravado!");
-				System.out.println(q);
+				ExecutaGeral.principal();
 			} else {
 				System.out.println("Erro ao gravar quarto!");
+				criarQuarto();
 			}
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -55,11 +52,13 @@ public class ExecutaQuarto {
 				for (Quarto qua : quartos) {
 					System.out.println(qua);
 				}
+				ExecutaGeral.principal();
 			} else {
 				List<Quarto> quartos = qd.buscarAndarEspecifico(vis);
 				for (Quarto qua : quartos) {
 					System.out.println(qua);
 				}
+				ExecutaGeral.principal();
 			}
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -86,7 +85,9 @@ public class ExecutaQuarto {
 			q.setAndarQuarto(EntradaDadosQuarto.capturarAndar());
 			q.setDispQuarto(EntradaDadosQuarto.capturarDisponibilidade());
 			q.setUpdate(vis);
+			
 			System.out.println(qd.atualizarQuarto(q));
+			ExecutaGeral.principal();
 
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -105,6 +106,7 @@ public class ExecutaQuarto {
 			Integer vis = s.nextInt();
 
 			System.out.println(qd.excluirQuarto(vis));
+			ExecutaGeral.principal();
 
 		} catch (Exception inputException) {
 			System.out.println("Digite apenas números!");
@@ -116,44 +118,23 @@ public class ExecutaQuarto {
 		q = new Quarto();
 		qd = new QuartoDAO();
 		s = new Scanner(System.in);
-		ld = new LoginDAO();
 
-		System.out.println("Digite a operação desejada: \nCriar - Visualizar - Atualizar - Apagar");
+		System.out.println("-- Quartos --\n Digite o que deseja fazer: \nCriar - Visualizar - Atualizar - Apagar");
 		String op = s.nextLine();
 		op.toLowerCase();
 
 		switch (op) {
 		case "criar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				criarQuarto();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
+			criarQuarto();
 			break;
 		case "visualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				visualizarQuarto();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
+			visualizarQuarto();
 			break;
 		case "atualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				atualizarQuarto();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
+			atualizarQuarto();
 			break;
 		case "apagar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				apagarQuarto();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
+			apagarQuarto();
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!");

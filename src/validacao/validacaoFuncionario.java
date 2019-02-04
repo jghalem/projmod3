@@ -1,9 +1,10 @@
 package validacao;
 
 import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
 
-public class validacaoCliente {
+public class validacaoFuncionario {
 
 	Pattern p; 
     Matcher m; 
@@ -42,18 +43,22 @@ public class validacaoCliente {
         return m.matches();
     }
 
-public boolean verificartelefone (String telefone){
+public boolean verificarcontato (String contato){
 
     p = Pattern.compile("[+0-9]{11,16}");
      
-    if(telefone.length() >= 11)
-    	
-    m = p.matcher(telefone);
-
+    if(contato.length() >= 11)
+    
+    m = p.matcher(contato);
+    
     return m.matches();
 }
 
 
+    
+
+    
+    
 }
 
 

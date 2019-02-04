@@ -1,60 +1,87 @@
 package execucao;
 
+import java.util.Scanner;
+
 public class ExecutaGeral extends ExecutaLogin {
 
 	public static void main(String[] args) throws Exception {
 
-		System.out.println("Digite a operação desejada: \nQuarto - Funcionario - Cliente - Reserva - Login");
-		String op = s.nextLine();
-		op.toLowerCase();
+		principal();
 
-		switch (op) {
-		case "quarto":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				ExecutaQuarto.testeMetodos();
+	}
+
+	static void principal() throws Exception {
+
+		Scanner s = new Scanner(System.in);
+
+		System.out.println("Digite o tipo de login: \nGerente - Funcionario");
+		String tlogin = s.nextLine();
+		tlogin.toLowerCase();
+
+		switch (tlogin) {
+		case "gerente":
+			if (fazerLoginGerente()) {
+				System.out.println("Digite a opção desejada: \nQuarto - Funcionario - Cliente - Reserva - Login");
+				String op = s.nextLine();
+				op.toLowerCase();
+
+				switch (op) {
+				case "quarto":
+					ExecutaQuarto.testeMetodos();
+					break;
+				case "funcionario":
+					ExecutaFuncionario.testeMetodos();
+					break;
+				case "cliente":
+					ExecutaCliente.testeMetodos();;
+					break;
+				case "reserva":
+					ExecutaReserva.testeMetodos();
+					break;
+				case "login":
+					testeMetodos();
+					break;
+				default:
+					System.out.println("Escolha uma das opções!\n");
+					principal();
+					break;
+				}
 			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
+				System.out.println("Verifique o tipo de login e tente novamente!");
+				fazerLoginGerente();
 			}
 			break;
 		case "funcionario":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				//ExecutaFuncionario.testeMetodos();
-				;
+			if (fazerLoginFuncionario()) {
+				System.out.println("Digite a operação desejada:\n Quarto - Cliente - Reserva");
+				String op = s.nextLine();
+				op.toLowerCase();
+
+				switch (op) {
+				case "quarto":
+					ExecutaQuarto.testeMetodos();
+					break;
+				case "cliente":
+					ExecutaCliente.testeMetodos();;
+					break;
+				case "reserva":
+					ExecutaReserva.testeMetodos();
+					break;
+				default:
+					System.out.println("Escolha uma das opções!\n");
+					principal();
+					break;
+				}
+
 			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
+				System.out.println("Verifique o tipo de login e tente novamente!");
+				fazerLoginFuncionario();
 			}
-			break;
-		case "cliente":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				//ExecutaCliente.testeMetodos();;
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
-			break;
-		case "reserva":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				ExecutaReserva.testeMetodos();;
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
-			break;
-		case "login":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				testeMetodos();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
+
 			break;
 		default:
-			System.out.println("Escolha uma das quatro opções!\n");
-			testeMetodos();
 			break;
 		}
-	}
 
+	}
 }

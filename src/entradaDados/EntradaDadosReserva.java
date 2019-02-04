@@ -2,6 +2,8 @@ package entradaDados;
 
 import java.util.Scanner;
 import java.time.Instant;
+
+import validacao.ValidacaoLogin;
 import validacao.ValidacaoQuarto;
 
 public class EntradaDadosReserva {
@@ -15,26 +17,26 @@ public class EntradaDadosReserva {
 		if (ValidacaoQuarto.validarQuarto(n)) {
 			return n;
 		} else {
-			System.out.println("Digite apenas valores numéricos!");
+			System.out.println("Digite apenas números!");
 			return capturarNumero();
 		}
 	}
 
-	public static Integer capturarAndar() {
+	public static String capturarVendedor() {
 		try {
 			s = new Scanner(System.in);
-			System.out.println("Digite o andar do quarto:");
-			int n = s.nextInt();
-			if (ValidacaoQuarto.validarAndar(n)) {
+			System.out.println("Digite o cpf do funcionario:");
+			String n = s.nextLine();
+			if (ValidacaoLogin.validarUsuario(n)) {
 				return n;
 			} else {
-				System.out.println("Digite apenas valores numéricos!");
-				return capturarAndar();
+				System.out.println("Digite apenas números!");
+				return capturarVendedor();
 			}
 		} catch (Exception e) {
 			System.out.println("Erro!" + e.getLocalizedMessage());
 			e.printStackTrace();
-			return capturarAndar();
+			return capturarVendedor();
 		}
 	}
 

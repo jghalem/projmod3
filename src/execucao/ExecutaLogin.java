@@ -24,7 +24,6 @@ public class ExecutaLogin {
 			l.setIdfuncionario(EntradaDadosLogin.capturarId());
 			l.setSenha(EntradaDadosLogin.capturarSenha());
 			l.setGerente(ld.buscarIsGerente(l.getIdfuncionario()));
-			l.setLogado(false);
 
 			if (ld.inserir(l)) {
 				System.out.println("Login Gravado!");
@@ -88,7 +87,6 @@ public class ExecutaLogin {
 				l.setUsuario(EntradaDadosLogin.capturarUsuario());
 				l.setSenha(EntradaDadosLogin.capturarSenha());
 				l.setGerente(EntradaDadosLogin.capturarIsGerente());
-				l.setLogado(false);
 
 				System.out.println(ld.atualizarLogin(l));
 			} else {
@@ -118,51 +116,86 @@ public class ExecutaLogin {
 		}
 	}
 
-	public static boolean fazerLogin() {
+	public static boolean fazerLoginFuncionario() throws Exception {
 		l = new Login();
 		ld = new LoginDAO();
 		s = new Scanner(System.in);
 
-		try {
-			System.out.println("Digite o usuario:");
-			String vis = s.nextLine();
-			if (ValidacaoLogin.validarUsuario(vis)) {
-				if (ld.fazerLoginUsuario(vis).equals(vis)) {
-					System.out.println("Digite a senha:");
-					String sen = s.nextLine();
+		System.out.println("Digite o usuario:");
+		String usu = s.nextLine();
+		if (ValidacaoLogin.validarUsuario(usu)) {
+			if (ld.fazerLoginUsuario(usu).equals(usu)) {
+				System.out.println("Digite a senha:");
+				String sen = s.nextLine();
 
-					if (ValidacaoLogin.validarSenha(sen)) {
-						if (ld.fazerLoginSenha(sen).equals(sen)) {
-							if (ld.defIsLogado(vis)) {
-								System.out.println("Logado com sucesso!");
-								return true;
-							}
+				if (ValidacaoLogin.validarSenha(sen)) {
+					if (ld.fazerLoginSenha(sen, usu).equals(sen)) {
+						if (!ld.buscarCargo(usu)) {
+							return true;
 						} else {
-							System.out.println("Senha incorreta!");
-							fazerLogin();
+							return false;
 						}
 					} else {
-						System.out.println(
-								"A senha deve ter de 6 a 20 caracteres e conter somente números, maiúsculas e minúsculas!");
-						fazerLogin();
+						System.out.println("Senha incorreta!");
+						fazerLoginFuncionario();
 					}
 				} else {
-					System.out.println("Usuário incorreto!");
-					fazerLogin();
+					System.out.println(
+							"A senha deve ter de 6 a 20 caracteres e conter somente números, maiúsculas e minúsculas!");
+					fazerLoginFuncionario();
 				}
 			} else {
-				System.out.println("O usuário deve ter 11 caracteres e conter somente números!");
-				fazerLogin();
+				System.out.println("Usuário incorreto!");
+				fazerLoginFuncionario();
 			}
+		} else {
+			System.out.println("O usuário deve ter 11 caracteres e conter somente números!");
+			fazerLoginFuncionario();
+		}
+		return false;
+	}
+	
+	public static boolean fazerLoginGerente() throws Exception {
+		l = new Login();
+		ld = new LoginDAO();
+		s = new Scanner(System.in);
 
-		} catch (Exception inputException) {
-			System.out.println("Erro!");
+		System.out.println("Digite o usuario:");
+		String usu = s.nextLine();
+		if (ValidacaoLogin.validarUsuario(usu)) {
+			if (ld.fazerLoginUsuario(usu).equals(usu)) {
+				System.out.println("Digite a senha:");
+				String sen = s.nextLine();
+
+				if (ValidacaoLogin.validarSenha(sen)) {
+					if (ld.fazerLoginSenha(sen, usu).equals(sen)) {
+						if (ld.buscarCargo(usu)) {
+							return true;
+						} else {
+							return false;
+						}
+					} else {
+						System.out.println("Senha incorreta!");
+						fazerLoginFuncionario();
+					}
+				} else {
+					System.out.println(
+							"A senha deve ter de 6 a 20 caracteres e conter somente números, maiúsculas e minúsculas!");
+					fazerLoginFuncionario();
+				}
+			} else {
+				System.out.println("Usuário incorreto!");
+				fazerLoginFuncionario();
+			}
+		} else {
+			System.out.println("O usuário deve ter 11 caracteres e conter somente números!");
+			fazerLoginFuncionario();
 		}
 		return false;
 	}
 
 	public static void testeMetodos() throws Exception {
-		
+
 		l = new Login();
 		ld = new LoginDAO();
 		s = new Scanner(System.in);
@@ -173,37 +206,16 @@ public class ExecutaLogin {
 
 		switch (op) {
 		case "criar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				criarLogin();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
+			criarLogin();
 			break;
 		case "visualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				visualizarLogin();
-				;
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
+			visualizarLogin();
 			break;
 		case "atualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				atualizarLogin();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
+			atualizarLogin();
 			break;
 		case "apagar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
-				apagarLogin();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				fazerLogin();
-			}
+			apagarLogin();
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!\n");

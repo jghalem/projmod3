@@ -18,13 +18,11 @@ public class LoginDAO extends DAO {
 			l.setUsuario(rs.getString("cpf"));
 		}
 
-		stmt = con.prepareStatement(
-				"insert into login (usuario,senha,isgerente,islogado,idfuncionario) values (?,?,?,?,?)");
+		stmt = con.prepareStatement("insert into login (usuario,senha,isgerente,idfuncionario) values (?,?,?,?)");
 		stmt.setString(1, l.getUsuario());
 		stmt.setString(2, l.getSenha());
 		stmt.setBoolean(3, l.isGerente());
-		stmt.setBoolean(4, false);
-		stmt.setInt(5, l.getIdfuncionario());
+		stmt.setInt(4, l.getIdfuncionario());
 
 		stmt.execute();
 		stmt.close();
@@ -44,6 +42,7 @@ public class LoginDAO extends DAO {
 			l.setUsuario(rs.getString("usuario"));
 			l.setSenha(rs.getString("senha"));
 			l.setGerente(rs.getBoolean("isGerente"));
+			l.setIdfuncionario(rs.getInt("idfuncionario"));
 
 			lista.add(l);
 		}
@@ -68,7 +67,6 @@ public class LoginDAO extends DAO {
 			l.setUsuario(rs.getString("usuario"));
 			l.setSenha(rs.getString("senha"));
 			l.setGerente(rs.getBoolean("isGerente"));
-			l.setLogado(rs.getBoolean("islogado"));
 			lista.add(l);
 		}
 		rs.close();
@@ -94,42 +92,6 @@ public class LoginDAO extends DAO {
 		stmt.close();
 		fecharConexao();
 		return isgerente;
-	}
-
-	public boolean defIsLogado(String usuario) throws Exception {
-
-		abrirConexao();
-		stmt = con.prepareStatement("update login set islogado = ? where usuario = ?");
-		stmt.setBoolean(1, true);
-		stmt.setString(2, usuario);
-
-		stmt.execute();
-
-		rs.close();
-		stmt.close();
-		fecharConexao();
-		return true;
-
-	}
-
-	public boolean buscarIsLogado(String usuario) throws Exception {
-
-		abrirConexao();
-		stmt = con.prepareStatement("select islogado from login where usuario = ?");
-		stmt.setString(1, usuario);
-
-		stmt.executeQuery();
-
-		boolean isLogado = false;
-		while (rs.next()) {
-			isLogado = rs.getBoolean("cargo");
-		}
-
-		rs.close();
-		stmt.close();
-		fecharConexao();
-		return isLogado;
-
 	}
 
 	public String atualizarLogin(Login l) throws Exception {
@@ -171,11 +133,12 @@ public class LoginDAO extends DAO {
 		return testeUsuario;
 	}
 
-	public String fazerLoginSenha(String senha) throws Exception {
+	public String fazerLoginSenha(String senha, String usuario) throws Exception {
 
 		abrirConexao();
-		stmt = con.prepareStatement("select senha from login where senha = ?");
+		stmt = con.prepareStatement("select senha from login where senha = ? and usuario = ? order by usuario limit 1");
 		stmt.setString(1, senha);
+		stmt.setString(2, usuario);
 
 		rs = stmt.executeQuery();
 
@@ -188,6 +151,25 @@ public class LoginDAO extends DAO {
 		stmt.close();
 		fecharConexao();
 		return testeSenha;
+	}
+	
+	public boolean buscarCargo(String usu) throws Exception {
+
+		abrirConexao();
+		stmt = con.prepareStatement("select isgerente from login where usuario = ? limit 1");
+		stmt.setString(1, usu);
+
+		rs = stmt.executeQuery();
+
+		boolean isgerente = false;
+		while (rs.next()) {
+			isgerente = rs.getBoolean("isgerente");
+		}
+
+		rs.close();
+		stmt.close();
+		fecharConexao();
+		return isgerente;
 	}
 
 	public String excluirLogin(Integer id) throws Exception {

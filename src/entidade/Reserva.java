@@ -5,20 +5,21 @@ import java.sql.Timestamp;
 public class Reserva {
 
 	private int numeroReserva;
-	private int cpf;
+	private String cpf;
 	private int numeroQuarto;
-	private int andarQuarto;
+	private String cpfVendedor;
 	private Timestamp checkIn;
 	private Timestamp checkOut;
+	private int update;
 
 	public Reserva() {
 	}
 
-	public Reserva(int numeroReserva, int cpf, int numeroQuarto, int andarQuarto, Timestamp checkIn) {
-		this.numeroReserva = numeroReserva;
+	public Reserva(String cpf, int numeroQuarto, String cpfVendedor, Timestamp checkIn) {
 		this.cpf = cpf;
 		this.numeroQuarto = numeroQuarto;
-		this.andarQuarto = andarQuarto;
+		this.cpfVendedor = cpfVendedor;
+		this.checkIn = checkIn;
 	}
 
 	public int getNumeroReserva() {
@@ -29,11 +30,11 @@ public class Reserva {
 		this.numeroReserva = numeroReserva;
 	}
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -45,12 +46,12 @@ public class Reserva {
 		this.numeroQuarto = numeroQuarto;
 	}
 
-	public int getAndarQuarto() {
-		return andarQuarto;
+	public String getCpfVendedor() {
+		return cpfVendedor;
 	}
 
-	public void setAndarQuarto(int andarQuarto) {
-		this.andarQuarto = andarQuarto;
+	public void setCpfVendedor(String cpfVendedor) {
+		this.cpfVendedor = cpfVendedor;
 	}
 
 	public Timestamp getCheckIn() {
@@ -67,12 +68,20 @@ public class Reserva {
 
 	public void setCheckOut(Timestamp checkOut) {
 		this.checkOut = checkOut;
+	}	
+
+	public int getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(int update) {
+		this.update = update;
 	}
 
 	@Override
 	public String toString() {
-		return "Info Reserva\n Numero: " + numeroReserva + "\n CPF Cliente: " + cpf + "\n Numero do Quarto: "
-				+ numeroQuarto + "\n Check-In: " + checkIn + "\n Check-Out: + checkOut";
+		return "Reserva [numeroReserva=" + numeroReserva + ", cpf=" + cpf + ", numeroQuarto=" + numeroQuarto
+				+ ", cpfVendedor=" + cpfVendedor + ", checkIn=" + checkIn + ", checkOut=" + checkOut + "]";
 	}
 
 }

@@ -1,12 +1,11 @@
 package entidade;
 
-public class Login /* extends Cliente */ {
+public class Login {
 
 	private String usuario;
 	private String senha;
 	private boolean isGerente;
 	private int idfuncionario;
-	private boolean isLogado;
 	private String update;
 
 	public Login() {
@@ -51,14 +50,6 @@ public class Login /* extends Cliente */ {
 		this.idfuncionario = idfuncionario;
 	}
 
-	public boolean isLogado() {
-		return isLogado;
-	}
-
-	public void setLogado(boolean isLogado) {
-		this.isLogado = isLogado;
-	}
-
 	public String getUpdate() {
 		return update;
 	}
@@ -76,15 +67,7 @@ public class Login /* extends Cliente */ {
 			disponivel = "Não";
 		}
 
-		String logado;
-		if (isLogado) {
-			logado = "Sim";
-		} else {
-			logado = "Não";
-		}
-
-		return "Contas Funcionários:\n Usuario: " + usuario + "\n Senha: " + senha + "\n Gerente? " + disponivel
-				+ " Logado? " + logado;
+		return "Contas Funcionários:\n Usuario: " + usuario + "\n Senha: " + senha + "\n Gerente? " + disponivel;
 	}
 
 }

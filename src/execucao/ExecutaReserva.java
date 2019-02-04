@@ -3,33 +3,28 @@ package execucao;
 import java.util.List;
 import java.util.Scanner;
 
-import entidade.Login;
-import entidade.Quarto;
 import entidade.Reserva;
-//import entidade.Cliente;
 import entradaDados.EntradaDadosReserva;
-import persistencia.LoginDAO;
+import entradaDados.entradaDadosCliente;
 import persistencia.ReservaDAO;
 
 public class ExecutaReserva {
 
-	private static Quarto q;
 	private static Reserva r;
 	private static ReservaDAO rd;
 	private static Scanner s;
-	private static LoginDAO ld;
-	private static Login l;
 
 	public static void criarReserva() {
 
 		rd = new ReservaDAO();
 		s = new Scanner(System.in);
+		r = new Reserva();
 
 		try {
 			r.setNumeroQuarto(EntradaDadosReserva.capturarNumero());
-			r.setAndarQuarto(EntradaDadosReserva.capturarAndar());
-			q.setDispQuarto(false);
+			r.setCpfVendedor(EntradaDadosReserva.capturarVendedor());
 			r.setCheckIn(EntradaDadosReserva.capturarDiaHora());
+			r.setCpf(entradaDadosCliente.capturarcpf());
 
 			// TODO: Terminar executareserva, entradadadosreserva, checar reservadao e
 			// corrigir erros do presente arquivo.
@@ -82,10 +77,12 @@ public class ExecutaReserva {
 				System.out.println(res);
 			}
 
-			q.setNumeroQuarto(EntradaDadosReserva.capturarNumero());
-			q.setAndarQuarto(EntradaDadosReserva.capturarAndar());
-			q.setDispQuarto(EntradaDadosReserva.capturarDisponibilidade());
-			q.setUpdate(vis);
+			r.setNumeroQuarto(EntradaDadosReserva.capturarNumero());
+			r.setCpfVendedor(EntradaDadosReserva.capturarVendedor());
+			r.setCheckIn(EntradaDadosReserva.capturarDiaHora());
+			r.setCpf(entradaDadosCliente.capturarcpf());
+			r.setUpdate(vis);
+			
 			System.out.println(rd.atualizarReserva(r));
 
 		} catch (Exception e) {
@@ -122,36 +119,16 @@ public class ExecutaReserva {
 
 		switch (op) {
 		case "criar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
 				criarReserva();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
 			break;
 		case "visualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
 				visualizarReserva();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
 			break;
 		case "atualizar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
 				atualizarReserva();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
 			break;
 		case "apagar":
-			if (ld.buscarIsLogado(l.getUsuario())) {
 				apagarReserva();
-			} else {
-				System.out.println("Faça login para poder acessar as opções!");
-				ExecutaLogin.fazerLogin();
-			}
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!");
