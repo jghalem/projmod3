@@ -35,7 +35,7 @@ isgerente boolean not null
 create table reserva(
 numeroreserva int primary key auto_increment not null,
 idlogin int not null,
-idquarto int not null,
+numquarto int not null,
 idcliente int not null,
 checkin timestamp not null,
 checkout timestamp null
