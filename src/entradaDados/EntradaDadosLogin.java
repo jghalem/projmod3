@@ -7,7 +7,7 @@ import validacao.ValidacaoLogin;
 public class EntradaDadosLogin {
 
 	private static Scanner s;
-	
+
 	public static String capturarUsuario() {
 		s = new Scanner(System.in);
 		System.out.println("Digite o cpf do usuario:");
@@ -39,7 +39,8 @@ public class EntradaDadosLogin {
 		if (ValidacaoLogin.validarSenha(n)) {
 			return n;
 		} else {
-			System.out.println("A senha deve ter de 6 a 20 caracteres e conter somente maiúsculas, minúsculas e números!");
+			System.out.println(
+					"A senha deve ter de 6 a 20 caracteres e conter somente maiúsculas, minúsculas e números!");
 			return capturarSenha();
 		}
 	}
@@ -63,7 +64,7 @@ public class EntradaDadosLogin {
 			return capturarIsGerente();
 		}
 	}
-	
+
 	public static Boolean capturarIsLogado() {
 		try {
 			s = new Scanner(System.in);

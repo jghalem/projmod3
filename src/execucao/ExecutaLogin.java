@@ -154,7 +154,7 @@ public class ExecutaLogin {
 		}
 		return false;
 	}
-	
+
 	public static boolean fazerLoginGerente() throws Exception {
 		l = new Login();
 		ld = new LoginDAO();

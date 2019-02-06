@@ -14,7 +14,8 @@ public class ExecutaCliente {
 
 		clienteDAO cd = new clienteDAO();
 
-		System.out.println("informe: 1 - para cadastro / 2 - para excluir/ 3 - para atualizar/ 4 - para visualizar");
+		System.out.println(
+				"-- Cliente --\nDigite o que deseja fazer:\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagar");
 		Scanner ler = new Scanner(System.in);
 		String opcao = ler.nextLine();
 
@@ -35,7 +36,7 @@ public class ExecutaCliente {
 			}
 			break;
 
-		case "2":
+		case "4":
 			try {
 				Scanner s = new Scanner(System.in);
 				System.out.println("Digite o cpf do cliente que deseja exluir:");
@@ -44,7 +45,7 @@ public class ExecutaCliente {
 				System.out.println("cliente cadastrado: ");
 				System.out.println(cd.buscarClienteEspecifico(vis));
 
-				System.out.println("insira o cpf para confirmar exclusão");
+				System.out.println("Insira novamente o cpf para confirmar exclusão");
 				cd.excluir(entradaDadosCliente.capturarcpf());
 				System.out.println("cliente excluído");
 				ExecutaGeral.principal();
@@ -81,7 +82,7 @@ public class ExecutaCliente {
 			}
 			break;
 
-		case "4":
+		case "2":
 			try {
 				Scanner s = new Scanner(System.in);
 				System.out.println("Deseja visualizar todos os clientes? (Digite '0')");

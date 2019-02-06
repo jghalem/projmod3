@@ -85,7 +85,7 @@ public class ExecutaQuarto {
 			q.setAndarQuarto(EntradaDadosQuarto.capturarAndar());
 			q.setDispQuarto(EntradaDadosQuarto.capturarDisponibilidade());
 			q.setUpdate(vis);
-			
+
 			System.out.println(qd.atualizarQuarto(q));
 			ExecutaGeral.principal();
 
@@ -119,21 +119,22 @@ public class ExecutaQuarto {
 		qd = new QuartoDAO();
 		s = new Scanner(System.in);
 
-		System.out.println("-- Quartos --\n Digite o que deseja fazer: \nCriar - Visualizar - Atualizar - Apagar");
+		System.out.println(
+				"-- Quartos --\nDigite o que deseja fazer:\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagar");
 		String op = s.nextLine();
 		op.toLowerCase();
 
 		switch (op) {
-		case "criar":
+		case "1":
 			criarQuarto();
 			break;
-		case "visualizar":
+		case "2":
 			visualizarQuarto();
 			break;
-		case "atualizar":
+		case "3":
 			atualizarQuarto();
 			break;
-		case "apagar":
+		case "4":
 			apagarQuarto();
 			break;
 		default:

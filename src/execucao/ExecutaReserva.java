@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import entidade.Reserva;
 import entradaDados.EntradaDadosReserva;
-import entradaDados.entradaDadosCliente;
 import persistencia.ReservaDAO;
 
 public class ExecutaReserva {
@@ -22,14 +21,17 @@ public class ExecutaReserva {
 
 		try {
 			r.setNumeroQuarto(EntradaDadosReserva.capturarNumero());
-			r.setCpfVendedor(EntradaDadosReserva.capturarVendedor());
+			r.setIdlogin(EntradaDadosReserva.capturarVendedor());
+			r.setIdCliente(EntradaDadosReserva.capturarId());
 			r.setCheckIn(EntradaDadosReserva.capturarDiaHora());
-			r.setCpf(entradaDadosCliente.capturarcpf());
 
-			// TODO: Terminar executareserva, entradadadosreserva, checar reservadao e
-			// corrigir erros do presente arquivo.
+			if (rd.inserir(r)) {
+				System.out.println("Reserva cadastrada com sucesso!");
 
-			rd.inserir(r);
+			} else {
+				System.out.println("Erro ao cadastrar reserva");
+
+			}
 
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -43,20 +45,13 @@ public class ExecutaReserva {
 		s = new Scanner(System.in);
 
 		try {
-			System.out.println("Deseja visualizar os quartos de que andar? (Digite '0' para todos)");
+			System.out.println("Digite o número da reserva que deseja visualizar:");
 			Integer vis = s.nextInt();
-			if (vis == 0) {
-				List<Reserva> reservas = rd.buscarReserva();
-				System.out.println("Quartos:\n");
-				for (Reserva res : reservas) {
-					System.out.println(res);
-				}
-			} else {
-				List<Reserva> reservas = rd.buscarReservaEspecifica(vis);
-				for (Reserva res : reservas) {
-					System.out.println(res);
-				}
+			List<Reserva> reservas = rd.buscarReservaEspecifica(vis);
+			for (Reserva res : reservas) {
+				System.out.println(res);
 			}
+			ExecutaGeral.principal();
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
 			e.printStackTrace();
@@ -78,11 +73,11 @@ public class ExecutaReserva {
 			}
 
 			r.setNumeroQuarto(EntradaDadosReserva.capturarNumero());
-			r.setCpfVendedor(EntradaDadosReserva.capturarVendedor());
+			r.setIdlogin(EntradaDadosReserva.capturarVendedor());
+			r.setIdCliente(EntradaDadosReserva.capturarId());
 			r.setCheckIn(EntradaDadosReserva.capturarDiaHora());
-			r.setCpf(entradaDadosCliente.capturarcpf());
 			r.setUpdate(vis);
-			
+
 			System.out.println(rd.atualizarReserva(r));
 
 		} catch (Exception e) {
@@ -113,22 +108,23 @@ public class ExecutaReserva {
 		rd = new ReservaDAO();
 		s = new Scanner(System.in);
 
-		System.out.println("Digite a operação desejada: \nCriar - Visualizar - Atualizar - Apagar");
+		System.out.println(
+				"-- Reservas --\nDigite a operação desejada:\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagar");
 		String op = s.nextLine();
 		op.toLowerCase();
 
 		switch (op) {
-		case "criar":
-				criarReserva();
+		case "1":
+			criarReserva();
 			break;
-		case "visualizar":
-				visualizarReserva();
+		case "2":
+			visualizarReserva();
 			break;
-		case "atualizar":
-				atualizarReserva();
+		case "3":
+			atualizarReserva();
 			break;
-		case "apagar":
-				apagarReserva();
+		case "4":
+			apagarReserva();
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!");

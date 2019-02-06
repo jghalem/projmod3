@@ -152,7 +152,7 @@ public class LoginDAO extends DAO {
 		fecharConexao();
 		return testeSenha;
 	}
-	
+
 	public boolean buscarCargo(String usu) throws Exception {
 
 		abrirConexao();

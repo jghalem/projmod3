@@ -18,7 +18,6 @@ public class clienteDAO extends DAO {
 		stmt.setString(2, C.getRg());
 		stmt.setString(3, C.getCpf());
 		stmt.setString(4, C.getTelefone());
-		
 
 		// Executar a instrução
 		stmt.execute();
@@ -46,8 +45,7 @@ public class clienteDAO extends DAO {
 			C.setRg(rs.getString("Rg"));
 			C.setCpf(rs.getString("cpf"));
 			C.setTelefone(rs.getString("Telefone"));
-		
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}
@@ -57,7 +55,7 @@ public class clienteDAO extends DAO {
 		fecharConexao();
 		return lista;
 	}
-	
+
 	public List<Cliente> buscarClienteEspecifico(String buscC) throws Exception {
 
 		abrirConexao();
@@ -74,8 +72,7 @@ public class clienteDAO extends DAO {
 			C.setRg(rs.getString("Rg"));
 			C.setCpf(rs.getString("cpf"));
 			C.setTelefone(rs.getString("Telefone"));
-		
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}
@@ -104,14 +101,13 @@ public class clienteDAO extends DAO {
 	public String atualizar(Cliente C) throws Exception {
 		try {
 			abrirConexao();
-			stmt = con.prepareStatement(
-					"update cliente set nome = ?, rg = ?, cpf = ?, telefone = ? where cpf = ?;");
+			stmt = con.prepareStatement("update cliente set nome = ?, rg = ?, cpf = ?, telefone = ? where cpf = ?;");
 			stmt.setString(1, C.getNome());
 			stmt.setString(2, C.getRg());
 			stmt.setString(3, C.getCpf());
 			stmt.setString(4, C.getTelefone());
 			stmt.setString(5, C.getUpdate());
-			
+
 			stmt.execute();
 			stmt.close();
 			fecharConexao();
@@ -122,7 +118,7 @@ public class clienteDAO extends DAO {
 		String st = "Cliente atualizado com sucesso!";
 		return st;
 	}
-	
+
 	public List<Cliente> visuCliente(Integer visu) throws Exception {
 
 		abrirConexao();
@@ -139,8 +135,7 @@ public class clienteDAO extends DAO {
 			C.setRg(rs.getString("Rg"));
 			C.setCpf(rs.getString("cpf"));
 			C.setTelefone(rs.getString("Telefone"));
-		
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}

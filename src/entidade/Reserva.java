@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 public class Reserva {
 
 	private int numeroReserva;
-	private String cpf;
+	private int idlogin;
 	private int numeroQuarto;
-	private String cpfVendedor;
+	private int idCliente;
 	private Timestamp checkIn;
 	private Timestamp checkOut;
 	private int update;
@@ -15,10 +15,11 @@ public class Reserva {
 	public Reserva() {
 	}
 
-	public Reserva(String cpf, int numeroQuarto, String cpfVendedor, Timestamp checkIn) {
-		this.cpf = cpf;
+	public Reserva(int numeroReserva, int idlogin, int numeroQuarto, int idCliente, Timestamp checkIn) {
+		this.numeroReserva = numeroReserva;
+		this.idlogin = idlogin;
 		this.numeroQuarto = numeroQuarto;
-		this.cpfVendedor = cpfVendedor;
+		this.idCliente = idCliente;
 		this.checkIn = checkIn;
 	}
 
@@ -30,12 +31,12 @@ public class Reserva {
 		this.numeroReserva = numeroReserva;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public int getIdlogin() {
+		return idlogin;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setIdlogin(int idlogin) {
+		this.idlogin = idlogin;
 	}
 
 	public int getNumeroQuarto() {
@@ -46,12 +47,12 @@ public class Reserva {
 		this.numeroQuarto = numeroQuarto;
 	}
 
-	public String getCpfVendedor() {
-		return cpfVendedor;
+	public int getIdCliente() {
+		return idCliente;
 	}
 
-	public void setCpfVendedor(String cpfVendedor) {
-		this.cpfVendedor = cpfVendedor;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public Timestamp getCheckIn() {
@@ -68,7 +69,7 @@ public class Reserva {
 
 	public void setCheckOut(Timestamp checkOut) {
 		this.checkOut = checkOut;
-	}	
+	}
 
 	public int getUpdate() {
 		return update;
@@ -80,8 +81,8 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return "Reserva [numeroReserva=" + numeroReserva + ", cpf=" + cpf + ", numeroQuarto=" + numeroQuarto
-				+ ", cpfVendedor=" + cpfVendedor + ", checkIn=" + checkIn + ", checkOut=" + checkOut + "]";
+		return "Reserva [numeroReserva=" + numeroReserva + ", idlogin=" + idlogin + ", numeroQuarto=" + numeroQuarto
+				+ ", idCliente=" + idCliente + ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", update=" + update
+				+ "]";
 	}
-
 }

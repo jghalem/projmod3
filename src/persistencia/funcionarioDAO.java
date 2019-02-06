@@ -3,7 +3,6 @@ package persistencia;
 
 import entidade.Funcionario;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class funcionarioDAO extends DAO {
 		stmt = con.prepareStatement("insert into Funcionario (nome,rg,cpf,contato,cargo) values (?,?,?,?,?)");
 
 		// substituir as instruções
-		//stmt.setInt(1, C.getCodigo());
+		// stmt.setInt(1, C.getCodigo());
 		stmt.setString(1, C.getNome());
 		stmt.setString(2, C.getRg());
 		stmt.setString(3, C.getCpf());
@@ -51,7 +50,7 @@ public class funcionarioDAO extends DAO {
 			C.setCpf(rs.getString("cpf"));
 			C.setContato(rs.getString("Contato"));
 			C.setCargo(rs.getBoolean("Cargo"));
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}
@@ -79,7 +78,7 @@ public class funcionarioDAO extends DAO {
 			C.setCpf(rs.getString("cpf"));
 			C.setContato(rs.getString("Contato"));
 			C.setCargo(rs.getBoolean("Cargo"));
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}
@@ -89,7 +88,7 @@ public class funcionarioDAO extends DAO {
 		fecharConexao();
 		return lista;
 	}
-	
+
 	// método de excluir cliente
 	public void excluir(String string) throws Exception {
 
@@ -116,7 +115,7 @@ public class funcionarioDAO extends DAO {
 			stmt.setString(4, C.getContato());
 			stmt.setBoolean(5, C.isCargo());
 			stmt.setString(6, C.getUpdate());
-			
+
 			stmt.execute();
 			stmt.close();
 			fecharConexao();
@@ -145,7 +144,7 @@ public class funcionarioDAO extends DAO {
 			C.setCpf(rs.getString("cpf"));
 			C.setContato(rs.getString("Contato"));
 			C.setCargo(rs.getBoolean("Cargo"));
-			
+
 			// adiciono o objeto na lista
 			lista.add(C);
 		}

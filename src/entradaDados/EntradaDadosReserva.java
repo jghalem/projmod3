@@ -3,7 +3,6 @@ package entradaDados;
 import java.util.Scanner;
 import java.time.Instant;
 
-import validacao.ValidacaoLogin;
 import validacao.ValidacaoQuarto;
 
 public class EntradaDadosReserva {
@@ -22,22 +21,30 @@ public class EntradaDadosReserva {
 		}
 	}
 
-	public static String capturarVendedor() {
+	public static Integer capturarVendedor() {
 		try {
 			s = new Scanner(System.in);
-			System.out.println("Digite o cpf do funcionario:");
-			String n = s.nextLine();
-			if (ValidacaoLogin.validarUsuario(n)) {
-				return n;
-			} else {
-				System.out.println("Digite apenas números!");
-				return capturarVendedor();
-			}
+			System.out.println("Digite o id do login:");
+			int n = s.nextInt();
+			return n;
+
 		} catch (Exception e) {
-			System.out.println("Erro!" + e.getLocalizedMessage());
-			e.printStackTrace();
+			System.out.println("Digite apenas números!");
 			return capturarVendedor();
 		}
+	}
+
+	public static Integer capturarId() {
+		try {
+			s = new Scanner(System.in);
+			System.out.println("Digite o id do cliente:");
+			int n = s.nextInt();
+			return n;
+		} catch (Exception e) {
+			System.out.println("Digite apenas números!");
+			return capturarId();
+		}
+
 	}
 
 	public static Boolean capturarDisponibilidade() {

@@ -15,7 +15,8 @@ public class ExecutaFuncionario {
 
 		funcionarioDAO cd = new funcionarioDAO();
 
-		System.out.println("informe 1 - para cadastro / 2 - para excluir/ 3 - para atualizar/ 4 - para visualizar");
+		System.out.println(
+				"-- Funcionarios --\\nDigite o que deseja fazer:\\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagarinforme 1 - para cadastro / 2 - para excluir/ 3 - para atualizar/ 4 - para visualizar");
 		Scanner ler = new Scanner(System.in);
 		String opcao = ler.nextLine();
 
@@ -29,28 +30,27 @@ public class ExecutaFuncionario {
 
 			try {
 				cd.inserir(c);
-				System.out.println("empregado agora está gravado...");
+				System.out.println("Funcionário cadastrado");
 				ExecutaGeral.principal();
 			} catch (Exception e) {
 				System.out.println("erro" + e.getMessage());
 				e.printStackTrace();// imprime linha onde está o erro
-
 			}
 			break;
 
-		case "2":
+		case "4":
 			try {
 				Scanner s = new Scanner(System.in);
-				System.out.println("Digite o cpf do empregado que deseja exluir:");
+				System.out.println("Digite o cpf do funcionário que deseja exluir:");
 				String vis = s.nextLine();
 
 				List<Funcionario> funcionarios = cd.buscarFuncionario();
-				System.out.println("empregado cadastrado: ");
+				System.out.println("Funcionário cadastrado: ");
 				System.out.println(cd.buscarFuncionarioEspecifico(vis));
 
-				System.out.println("insira o cpf para confirmar exclusão");
+				System.out.println("Insira o cpf para confirmar exclusão");
 				cd.excluir(entradaDadosFuncionario.capturarcpf());
-				System.out.println("empregado excluído");
+				System.out.println("Funcionário excluído do sistema");
 				ExecutaGeral.principal();
 			} catch (Exception e) {
 				System.out.println("erro" + e.getMessage());
@@ -61,7 +61,7 @@ public class ExecutaFuncionario {
 		case "3":
 			try {
 				Scanner s = new Scanner(System.in);
-				System.out.println("Digite o cpf do empregado que deseja alterar:");
+				System.out.println("Digite o cpf do funcionário que deseja alterar:");
 				String vis = s.nextLine();
 
 				List<Funcionario> funcionarios = cd.buscarFuncionarioEspecifico(vis);
@@ -87,10 +87,11 @@ public class ExecutaFuncionario {
 			}
 			break;
 
-		case "4":
+		case "2":
 			try {
 				Scanner s = new Scanner(System.in);
-				System.out.println("Deseja visualizar todos os funcionarios? (Digite '0')");
+				System.out.println(
+						"Qual o cpf do funcionário que deseja visualizar? (Digite '0' para ver todos os funcionarios)");
 				Integer vis = s.nextInt();
 				if (vis == 0) {
 					List<Funcionario> funcionarios = cd.buscarFuncionario();
@@ -114,7 +115,7 @@ public class ExecutaFuncionario {
 				e.printStackTrace();
 			}
 		default:
-			System.out.println("Digite uma das quatro opções!");
+			System.out.println("Escolha uma das quatro opções!");
 			ExecutaFuncionario.testeMetodos();
 		}
 	}
