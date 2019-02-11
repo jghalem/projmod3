@@ -27,15 +27,16 @@ public class ExecutaReserva {
 
 			if (rd.inserir(r)) {
 				System.out.println("Reserva cadastrada com sucesso!");
+				ExecutaGeral.principal();
 
 			} else {
 				System.out.println("Erro ao cadastrar reserva");
-
+				criarReserva();
 			}
 
-		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
-			e.printStackTrace();
+		}  catch (Exception inputException) {
+			System.out.println("Digite apenas caracteres permitidos!");
+			criarReserva();
 		}
 	}
 
@@ -52,9 +53,9 @@ public class ExecutaReserva {
 				System.out.println(res);
 			}
 			ExecutaGeral.principal();
-		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
-			e.printStackTrace();
+		} catch (Exception inputException) {
+			System.out.println("Digite apenas caracteres permitidos!");
+			visualizarReserva();
 		}
 	}
 
@@ -78,11 +79,17 @@ public class ExecutaReserva {
 			r.setCheckIn(EntradaDadosReserva.capturarDiaHora());
 			r.setUpdate(vis);
 
-			System.out.println(rd.atualizarReserva(r));
+			if (rd.atualizarReserva(r)) {
+				System.out.println("Reserva atualizada com sucesso!");
+				ExecutaGeral.principal();
+			} else {
+				System.out.println("Erro ao atualizar reserva!");
+				atualizarReserva();
+			}
 
-		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
-			e.printStackTrace();
+		} catch (Exception inputException) {
+			System.out.println("Digite apenas caracteres permitidos!");
+			atualizarReserva();
 		}
 	}
 
@@ -95,10 +102,40 @@ public class ExecutaReserva {
 			System.out.println("Digite o numero do quarto que deseja apagar:");
 			Integer vis = s.nextInt();
 
-			rd.excluirReserva(vis);
+			if (rd.excluirReserva(vis)) {
+				System.out.println("Reserva excluida com sucesso!");
+				ExecutaGeral.principal();
+			} else {
+				System.out.println("Erro ao excluir reserva!");
+				apagarReserva();
+			}	
 
 		} catch (Exception inputException) {
 			System.out.println("Digite apenas números!");
+			apagarReserva();
+		}
+	}
+	
+	public static void fazerCheckOut() {
+
+		rd = new ReservaDAO();
+		s = new Scanner(System.in);
+
+		try {
+			System.out.println("Digite o numero da reserva para fazer Checkout:");
+			Integer vis = s.nextInt();
+
+			if (rd.checkout(vis)) {
+				System.out.println("Checkout realizado com sucesso!");
+				ExecutaGeral.principal();
+			} else {
+				System.out.println("Erro ao fazer checkout!");
+				fazerCheckOut();
+			}	
+
+		} catch (Exception inputException) {
+			System.out.println("Digite apenas números!");
+			apagarReserva();
 		}
 	}
 
@@ -109,7 +146,7 @@ public class ExecutaReserva {
 		s = new Scanner(System.in);
 
 		System.out.println(
-				"-- Reservas --\nDigite a operação desejada:\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagar");
+				"-- Reservas --\nDigite a operação desejada:\n1- Criar | 2- Visualizar | 3- Atualizar | 4- Apagar | 5- Checkout");
 		String op = s.nextLine();
 		op.toLowerCase();
 
@@ -125,6 +162,9 @@ public class ExecutaReserva {
 			break;
 		case "4":
 			apagarReserva();
+			break;
+		case "5":
+			fazerCheckOut();
 			break;
 		default:
 			System.out.println("Escolha uma das quatro opções!");

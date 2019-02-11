@@ -41,6 +41,21 @@ public class ReservaDAO extends DAO {
 
 	}
 
+	public boolean checkout(Integer reserva) throws Exception {
+		abrirConexao();
+		stmt = con.prepareStatement("update reserva set dispquarto = false where idreserva = ?");
+
+		stmt.setInt(1, reserva);
+
+		if (stmt.execute()) {
+			stmt.close();
+			fecharConexao();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public List<Reserva> buscarReserva() throws Exception {
 		abrirConexao();
 		stmt = con.prepareStatement("select * from reserva where 1");
@@ -92,7 +107,7 @@ public class ReservaDAO extends DAO {
 
 	}
 
-	public String atualizarReserva(Reserva r) throws Exception {
+	public boolean atualizarReserva(Reserva r) throws Exception {
 		try {
 			abrirConexao();
 			stmt = con.prepareStatement(
@@ -103,29 +118,34 @@ public class ReservaDAO extends DAO {
 			stmt.setInt(3, r.getNumeroQuarto());
 			stmt.setInt(4, r.getUpdate());
 
-			stmt.execute();
-
-			stmt.close();
-			fecharConexao();
+			if (stmt.execute()) {
+				stmt.close();
+				fecharConexao();
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			System.out.println("Erro ao atualizar! " + e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		String st = "Reserva atualizada com sucesso!";
-		return st;
+		return false;
 	}
 
-	public void excluirReserva(Integer id) throws Exception {
+	public boolean excluirReserva(Integer id) throws Exception {
 
 		abrirConexao();
 		stmt = con.prepareStatement("delete from reserva where numeroreserva = ?");
 
 		stmt.setInt(1, id);
 
-		stmt.execute();
-		stmt.close();
-
-		fecharConexao();
+		if (stmt.execute()) {
+			stmt.close();
+			fecharConexao();
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 }
